@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lumen Secret Forest</title>
+	<meta charset="utf-8">
+	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+	<style>
+	#containment-wrapper {
+	  width:2000px;
+	  height:2000px;
+	}
+	#avatars{
+		position:absolute;
+		top:500px;
+	}
+	.avatar{
+		width:70px;
+	}
+	.wide-avatar{
+		width:100px;
+	}
+	#nest{
+		position:absolute;
+		left:300px;
+		top:500px;
+		width:500px;
+	}
+	</style>
+</head>
+<body>
+	<div id="containment-wrapper">
+		<img id="tree" src="assets/secret-forest.png">
+		<img id="nest" class="draggable" src="assets/shell-nest.png">
+	</div>
+	<div id="avatars">
+		<img id="draggable" class="avatar" src="assets/basil.PNG">
+		<img id="draggable" class="avatar" src="assets/bb8.PNG">
+		<img id="draggable" class="avatar" src="assets/butterfly1.PNG">
+		<img id="draggable" class="avatar" src="assets/butterfly2.PNG">
+		<img id="draggable" class="avatar" src="assets/can.PNG">
+		<img id="draggable" class="avatar" src="assets/character2.png">
+		<img id="draggable" class="avatar" src="assets/heartface.png">
+		<img id="draggable" class="avatar" src="assets/heartface2.png">
+		<img id="draggable" class="avatar" src="assets/hearty.png">
+		<img id="draggable" class="avatar" src="assets/log-babies.PNG">
+		<img id="draggable" class="avatar" src="assets/mrLog.PNG">
+		<img id="draggable" class="avatar" src="assets/mrsLog.PNG">
+		<img id="draggable" class="avatar" src="assets/nutcracker.PNG">
+		<img id="draggable" class="avatar" src="assets/o'ha-pangolin.PNG">
+		<img id="draggable" class="avatar" src="assets/shell-nest.png">
+		<img id="draggable" class="avatar" src="assets/totoro2.png">
+	</div>
+</body>
+<script>
+	var positions = JSON.parse(localStorage.positions || "{}");
+$(function () {
+    var d = $("[id=draggable]").attr("id", function (i) {
+        return "draggable_" + i
+    })
+    $.each(positions, function (id, pos) {
+        $("#" + id).css(pos)
+    })
+
+    d.draggable({
+        containment: "#containment-wrapper",
+        scroll: false,
+        stop: function (event, ui) {
+            positions[this.id] = ui.position
+            localStorage.positions = JSON.stringify(positions)
+        }
+    });
+            
+});
+
+	$(function() {
+   	 $( ".draggable" ).draggable();
+  	});
+</script>
+</html>
